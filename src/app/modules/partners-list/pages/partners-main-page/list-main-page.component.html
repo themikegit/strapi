@@ -1,0 +1,57 @@
+<p-table
+  (onRowSelect)="onRowSelect($event)"
+  [columns]="cols"
+  [value]="clients"
+  responsiveLayout="scroll"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex justify-content-between">
+      <button pButton label="Create" (click)="addNewPartner()"></button>
+      <button
+        type="button"
+        pButton
+        pRipple
+        icon="pi pi-file-excel"
+        (click)="exportExcel()"
+        class="p-button-success mr-2"
+        pTooltip="XLS"
+        tooltipPosition="bottom"
+      ></button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns">
+        {{ col.header }}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-client>
+    <tr>
+      <td>{{ client.attributes.firstName }}</td>
+      <td>{{ client.attributes.lastName }}</td>
+      <td>{{ client.attributes.role }}</td>
+      <td>
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-user"
+          class="p-button-rounded p-button-text p-button-sm"
+          (click)="onRowSelect(client)"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-sidebar
+  position="right"
+  [style]="{ width: '60%' }"
+  [(visible)]="sidebarStatus"
+>
+  <app-client-sidebar-details
+    [clientDetails]="clientDetails"
+  ></app-client-sidebar-details>
+</p-sidebar>
+
+<p-toast position="top-center"></p-toast>

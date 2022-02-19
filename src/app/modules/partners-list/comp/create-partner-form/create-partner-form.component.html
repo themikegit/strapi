@@ -1,0 +1,14 @@
+<form [formGroup]="createPartnersForm" (ngSubmit)="onSubmit()">
+  <div class="mt-5" *ngFor="let item of partnersFields">
+    <span class="p-float-label">
+      <input
+        id="float-input"
+        type="text"
+        pInputText
+        [formControlName]="item.control"
+      />
+      <label for="float-input"> {{ item.label }}</label>
+    </span>
+  </div>
+  <p-button type="submit" label="Save"></p-button>
+</form>
